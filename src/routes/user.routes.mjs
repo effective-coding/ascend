@@ -1,6 +1,6 @@
 import express from "express";
 
-import User from "../mongoose/schemas/user.mjs";
+import User from "../mongoose/schemas/user.schema.mjs";
 
 const routes = express.Router({ strict: true });
 

@@ -6,6 +6,12 @@ const UserSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.String,
       required: true,
     },
+    username: {
+      type: mongoose.Schema.Types.String,
+    },
+    password: {
+      type: mongoose.Schema.Types.String,
+    },
   },
   {
     timestamps: {
