@@ -3,6 +3,7 @@ import "dotenv/config";
 import helmet from "helmet";
 import morgan from "morgan";
 import express from "express";
+import session from "express-session";
 import cookieParser from "cookie-parser";
 
 import url from "node:url";
@@ -24,6 +25,17 @@ function createApp() {
   app.use(cookieParser(process.env.COOKIE_SECRET));
   app.use(
     morgan(":method :url :status :res[content-length] - :response-time ms")
+  );
+
+  app.use(
+    session({
+      secret: process.env.SESSION_SECRET,
+      resave: false,
+      saveUninitialized: false,
+      cookie: {
+        maxAge: 1000 * 60 * 60 * 24,
+      },
+    })
   );
 
   app.use("/assets", express.static(path.join(__dirname, "assets")));
