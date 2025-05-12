@@ -1,9 +1,14 @@
+import debug from "debug";
+
 import helmet from "helmet";
 import morgan from "morgan";
 import express from "express";
 import passport from "passport";
 import session from "express-session";
 import cookieParser from "cookie-parser";
+
+import { RedisStore } from "connect-redis";
+import { createClient } from "redis";
 
 import url from "node:url";
 import path from "node:path";
@@ -16,6 +21,13 @@ const __dirname = path.dirname(__filename);
 
 function createApp() {
   const app = express();
+  const logger = debug("app:redis");
+  const redisClient = createClient();
+
+  redisClient
+    .connect()
+    .then(() => logger("connected"))
+    .catch(() => logger("unable to connect to redis instance"));
 
   app.disable("X-Powered-By");
 
@@ -35,6 +47,10 @@ function createApp() {
       cookie: {
         maxAge: 1000 * 60 * 60 * 24,
       },
+      store: new RedisStore({
+        client: redisClient,
+        prefix: 'ascend:'
+      }),
     })
   );
 

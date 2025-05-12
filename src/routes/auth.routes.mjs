@@ -11,4 +11,18 @@ routes.post(
   }
 );
 
+routes.get("/status", (request, response) => {
+  return request.user ? response.sendStatus(200) : response.sendStatus(401);
+});
+
+routes.post("/logout", (request, response) => {
+  if (!request.user) {
+    return response.sendStatus(401);
+  }
+
+  request.logOut((err) => {
+    return err ? response.sendStatus(401) : response.sendStatus(200);
+  });
+});
+
 export default routes;
