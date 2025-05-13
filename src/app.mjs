@@ -22,7 +22,9 @@ const __dirname = path.dirname(__filename);
 function createApp() {
   const app = express();
   const logger = debug("app:redis");
-  const redisClient = createClient();
+  const redisClient = createClient({
+    url: process.env.REDIS_URL
+  });
 
   redisClient
     .connect()
