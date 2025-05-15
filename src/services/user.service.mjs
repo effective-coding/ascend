@@ -11,6 +11,7 @@ export async function createUser(data) {
     const user = await User.create({
       name: data.name,
       email: data.email,
+      role: data.role
     });
 
     await Account.create({

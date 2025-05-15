@@ -11,6 +11,10 @@ const UserSchema = new mongoose.Schema(
       index: true,
       unique: true,
     },
+    role: {
+      type: mongoose.Schema.Types.String,
+      required: true
+    },
   },
   {
     timestamps: {
