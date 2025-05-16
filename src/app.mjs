@@ -23,7 +23,7 @@ function createApp() {
   const app = express();
   const logger = debug("app:redis");
   const redisClient = createClient({
-    url: process.env.REDIS_URL
+    url: `redis://:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
   });
 
   redisClient
@@ -51,7 +51,7 @@ function createApp() {
       },
       store: new RedisStore({
         client: redisClient,
-        prefix: 'ascend:'
+        prefix: "ascend:",
       }),
     })
   );
