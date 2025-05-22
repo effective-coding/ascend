@@ -7,12 +7,7 @@ const RoomSchema = new mongoose.Schema(
       ref: "User",
     },
     name: {
-      id: {
-        type: mongoose.Schema.Types.String,
-      },
-      type: {
-        type: mongoose.Schema.Types.String,
-      },
+      type: mongoose.Schema.Types.String,
     },
   },
   {
