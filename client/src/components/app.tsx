@@ -1,3 +1,16 @@
+import React from "react";
+
 export default function App() {
-  return <h1>Sample</h1>
+  const [status, setStatus] = React.useState({});
+
+  React.useEffect(() => {
+    async function getServerStatus() {
+      const status = await fetch("/api/health/status");
+      return setStatus(await status.json());
+    }
+
+    getServerStatus();
+  }, []);
+
+  return <h1 className="text-2xl">{JSON.stringify(status)}</h1>;
 }
